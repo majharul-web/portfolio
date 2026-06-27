@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-canvas: #fafaf8;
+  --color-panel: #f0efe9;
+  --color-ink: #44473e;
+  --color-ink-muted: #8a8d80;
+  --color-ink-bright: #16170f;
+  --color-accent: #5a9e00;
+  --color-accent-dim: #4a8200;
+  --color-hairline: #e3e1d6;
+}
+
+.dark {
+  --color-canvas: #0a0e14;
+  --color-panel: #0f1419;
+  --color-ink: #c8d1de;
+  --color-ink-muted: #5a6577;
+  --color-ink-bright: #e6edf5;
+  --color-accent: #c6ff3d;
+  --color-accent-dim: #9bcc2e;
+  --color-hairline: #1c2430;
+}
+
+@theme inline {
+  --color-canvas: var(--color-canvas);
+  --color-panel: var(--color-panel);
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-ink-bright: var(--color-ink-bright);
+  --color-accent: var(--color-accent);
+  --color-accent-dim: var(--color-accent-dim);
+  --color-hairline: var(--color-hairline);
+
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, "SF Mono", monospace;
+  --font-display: var(--font-display), var(--font-sans), ui-sans-serif,
+    system-ui, sans-serif;
+}
+
+html {
+  background: var(--color-canvas);
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-canvas);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Pointer-following ambient glow. Position comes from --glow-x/--glow-y,
+   written directly by CursorGlow.tsx; opacity fades in/out at the
+   viewport edge via --glow-opacity. */
+.cursor-glow {
+  --glow-x: 50vw;
+  --glow-y: 50vh;
+  --glow-opacity: 0;
+  background: radial-gradient(
+    600px circle at var(--glow-x) var(--glow-y),
+    color-mix(in srgb, var(--color-accent) 14%, transparent),
+    transparent 70%
+  );
+  opacity: var(--glow-opacity);
+  transition: opacity 0.4s ease;
+}
+
+/* Thin custom scrollbar for the content column */
+.content-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.content-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.content-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-hairline);
+  border-radius: 4px;
+}
+.content-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-muted);
+}
