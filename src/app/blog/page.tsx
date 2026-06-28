@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { blogPosts, profile } from "@/data/content";
 import { ArrowLeftIcon } from "@/components/icons";
 
@@ -33,22 +34,32 @@ export default function BlogPage() {
               className="group block overflow-hidden rounded-xl border border-hairline bg-panel transition-colors hover:border-accent"
             >
               <div
-                className="flex h-40 items-end p-5"
+                className="relative flex h-40 items-end p-5"
                 style={
-                  post.thumbnailGradient
+                  !post.thumbnail && post.thumbnailGradient
                     ? {
                         background: `linear-gradient(135deg, ${post.thumbnailGradient[0]}, ${post.thumbnailGradient[1]})`,
                       }
                     : undefined
                 }
               >
-                <span className="font-display text-xl font-semibold leading-tight text-canvas drop-shadow-sm">
-                  {post.title}
-                </span>
+                {post.thumbnail ? (
+                  <Image
+                    src={post.thumbnail}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 640px) 400px, 100vw"
+                  />
+                ) : (
+                  <span className="font-display text-xl font-semibold leading-tight text-canvas drop-shadow-sm">
+                    {post.title}
+                  </span>
+                )}
               </div>
               <div className="p-5">
                 <p className="font-mono text-xs text-ink-muted">
-                  {post.category ?? "Blog"} · {post.date}
+                  {[post.category ?? "Blog", post.date].filter(Boolean).join(" · ")}
                 </p>
                 <h3 className="mt-2 font-medium text-ink-bright transition-colors group-hover:text-accent">
                   {post.title}

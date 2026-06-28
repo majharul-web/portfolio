@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { nav, profile, socials } from "@/data/content";
 import { useActiveSection } from "@/lib/useActiveSection";
 import { iconMap, ExternalLinkIcon } from "@/components/icons";
+import { GradientButton } from "@/components/GradientButton";
 
 const sectionIds = nav.map((item) => item.id);
 
@@ -86,16 +87,12 @@ export function Sidebar() {
           {profile.tagline}
         </motion.p>
 
-        <motion.a
-          variants={variants}
-          href={profile.resumeHref}
-          target="_blank"
-          rel="noreferrer"
-          className="group mt-6 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.15em] text-ink-bright transition-colors hover:text-accent"
-        >
-          View full résumé
-          <ExternalLinkIcon className="h-3 w-3 transition-colors group-hover:text-accent" />
-        </motion.a>
+        <motion.div variants={variants} className="mt-6">
+          <GradientButton href={profile.resumeHref} external>
+            View full résumé
+            <ExternalLinkIcon className="h-3.5 w-3.5" />
+          </GradientButton>
+        </motion.div>
 
         <motion.nav
           variants={variants}

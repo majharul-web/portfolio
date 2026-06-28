@@ -8,7 +8,7 @@ export function Experience() {
       <ol className="max-w-xl space-y-10">
         {experience.map((job) => (
           <li
-            key={`${job.company}-${job.range}`}
+            key={`${job.company}-${job.title}-${job.range}`}
             className="group relative grid gap-1 sm:grid-cols-[120px_1fr] sm:gap-4"
           >
             <p className="font-mono text-xs text-ink-muted sm:pt-1">
@@ -32,9 +32,19 @@ export function Experience() {
                   <span className="text-accent">{job.company}</span>
                 )}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                {job.description}
-              </p>
+              {job.location && (
+                <p className="mt-0.5 text-xs text-ink-muted">
+                  {job.location}
+                </p>
+              )}
+              <ul className="mt-3 space-y-2 text-sm leading-relaxed text-ink-muted">
+                {job.bullets.map((bullet, i) => (
+                  <li key={i} className="flex gap-2.5">
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-ink-muted" />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {job.stack.map((tech) => (
                   <li

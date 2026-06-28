@@ -1,3 +1,5 @@
+import Link from "next/link";
+import Image from "next/image";
 import type { ProjectEntry } from "@/data/content";
 import { ExternalLinkIcon, StarIcon, DownloadIcon } from "@/components/icons";
 
@@ -6,14 +8,12 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const hasLiveLink = Boolean(project.href && project.href !== "#");
+
   return (
-    <a
-      href={project.href}
-      target="_blank"
-      rel="noreferrer"
-      className="group flex gap-4 rounded-lg p-2 -m-2 transition-colors hover:bg-panel sm:gap-5"
-    >
-      <span
+    <div className="flex gap-4 rounded-lg p-2 -m-2 transition-colors hover:bg-panel sm:gap-5">
+      <Link
+        href={`/projects/${project.slug}`}
         className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md ring-1 ring-hairline sm:h-24 sm:w-24"
         style={
           project.thumbnailGradient
@@ -24,20 +24,39 @@ export function ProjectCard({ project }: ProjectCardProps) {
         }
       >
         {project.thumbnail && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={project.thumbnail}
-            alt=""
-            className="h-full w-full object-cover"
+            alt={project.name}
+            fill
+            className="object-cover"
+            sizes="96px"
           />
         )}
-      </span>
+      </Link>
 
       <div className="min-w-0 flex-1">
-        <h3 className="flex items-center gap-1.5 font-medium text-ink-bright">
-          {project.name}
-          <ExternalLinkIcon className="h-3.5 w-3.5 text-ink-muted transition-colors group-hover:text-accent" />
-        </h3>
+        <div className="flex items-center gap-2">
+          <h3 className="min-w-0">
+            <Link
+              href={`/projects/${project.slug}`}
+              className="font-medium text-ink-bright transition-colors hover:text-accent"
+            >
+              {project.name}
+            </Link>
+          </h3>
+          {hasLiveLink && (
+            <a
+              href={project.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Open ${project.name} live site`}
+              title="Open live site"
+              className="inline-flex shrink-0 items-center text-ink-muted transition-colors hover:text-accent"
+            >
+              <ExternalLinkIcon className="h-3.5 w-3.5" />
+            </a>
+          )}
+        </div>
         <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">
           {project.description}
         </p>
@@ -65,6 +84,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </ul>
         </div>
       </div>
-    </a>
+    </div>
   );
 }

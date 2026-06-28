@@ -93,6 +93,35 @@ body {
 .content-scroll::-webkit-scrollbar {
   width: 8px;
 }
+
+/* Animated rotating gradient border for primary CTA buttons. The ring
+   itself is a conic-gradient that spins via the --gradient-angle custom
+   property (registered as an animatable <angle> below); the button's
+   actual background sits inset by the wrapper's padding, leaving just
+   a thin glowing border visible. */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.gradient-button-ring {
+  background: conic-gradient(
+    from var(--gradient-angle),
+    var(--color-accent),
+    #22d3ee,
+    #a78bfa,
+    var(--color-accent)
+  );
+  animation: gradient-button-spin 4s linear infinite;
+  box-shadow: 0 0 16px -4px color-mix(in srgb, var(--color-accent) 60%, transparent);
+}
+
+@keyframes gradient-button-spin {
+  to {
+    --gradient-angle: 360deg;
+  }
+}
 .content-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
