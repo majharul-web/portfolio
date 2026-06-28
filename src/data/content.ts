@@ -15,9 +15,19 @@ export const profile = {
 
 export const nav = [
   { id: "about", label: "about" },
+  { id: "skills", label: "skills" },
   { id: "experience", label: "experience" },
   { id: "projects", label: "projects" },
   { id: "blog", label: "blog" },
+] as const;
+
+// Cross-page navigation shown in the dock. Unlike `nav` above (in-page
+// anchors used only on the homepage), these are real routes.
+export const dockNav = [
+  { id: "home", label: "home", href: "/" },
+  { id: "about", label: "about", href: "/about" },
+  { id: "archive", label: "archive", href: "/archive" },
+  { id: "blog", label: "blog", href: "/blog" },
 ] as const;
 
 export const socials = [
@@ -39,6 +49,64 @@ export const about = {
     "Outside of work, I'm usually exploring new frameworks, contributing to small open-source tools, or rebuilding something I already finished — just to do it cleaner the second time.",
   ],
 };
+
+// ---------------------------------------------------------------------------
+// "What I Do" — icon-card grid shown on the /about page. `icon` keys map
+// to components in icons.tsx via the iconMap in WhatIDo.tsx.
+// ---------------------------------------------------------------------------
+export type WhatIDoEntry = {
+  icon: "layout" | "server" | "database" | "puzzle";
+  title: string;
+  description: string;
+};
+
+export const whatIDo: WhatIDoEntry[] = [
+  {
+    icon: "layout",
+    title: "Frontend Development",
+    description:
+      "Building responsive, accessible interfaces with React, Next.js, and TypeScript — from component libraries to full admin dashboards.",
+  },
+  {
+    icon: "server",
+    title: "Full-Stack Apps",
+    description:
+      "Connecting frontends to real backends — REST APIs, auth flows, and data-heavy features built end to end.",
+  },
+  {
+    icon: "database",
+    title: "Data-Heavy UI",
+    description:
+      "Tables, filters, dashboards, and forms that stay fast and clear even when the underlying data gets complicated.",
+  },
+  {
+    icon: "puzzle",
+    title: "Developer Experience",
+    description:
+      "Reusable components, clean typing, and project structure that makes a codebase easier to extend than it was to write.",
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Skills — shown as a badge grid on the homepage. `icon` is any simple
+// label; swap in real tech logos later if you want (see Skills.tsx).
+// ---------------------------------------------------------------------------
+export type SkillEntry = {
+  name: string;
+};
+
+export const skills: SkillEntry[] = [
+  { name: "React" },
+  { name: "Next.js" },
+  { name: "TypeScript" },
+  { name: "Node.js" },
+  { name: "Tailwind CSS" },
+  { name: "PostgreSQL" },
+  { name: "Redux Toolkit" },
+  { name: "Django REST" },
+  { name: "Docker" },
+  { name: "Git" },
+];
 
 export type ExperienceEntry = {
   range: string;
@@ -134,52 +202,48 @@ export const projects: ProjectEntry[] = [
 export const projectsArchiveHref = "/archive";
 
 // ---------------------------------------------------------------------------
-// Full project archive — shown at /archive as a table. This list is meant
-// to grow over time; add entries here as you ship more, newest first.
-// Doesn't need to match `projects` above exactly — that's a curated
-// homepage highlight reel, this is the complete record.
+// Full project archive — shown at /archive using the same card-row style
+// as the homepage's curated `projects` list above. This one is meant to
+// grow over time as you ship more; add entries at the top, newest first.
+// Doesn't need to match `projects` exactly — that's a highlight reel,
+// this is the complete record.
 // ---------------------------------------------------------------------------
-export type ArchiveEntry = {
-  year: string;
-  name: string;
-  madeAt: string;
-  stack: string[];
-  href?: string;
-  linkLabel?: string;
-};
-
-export const archiveProjects: ArchiveEntry[] = [
+export const archiveProjects: ProjectEntry[] = [
   {
-    year: "2026",
     name: "Project One",
-    madeAt: "Personal",
+    href: "#",
+    description:
+      "A short description of what this project does and the problem it solves for its users.",
     stack: ["Next.js", "TypeScript", "PostgreSQL"],
-    href: "#",
-    linkLabel: "project-one.dev",
+    thumbnailGradient: ["#7c3aed", "#22d3ee"],
+    stat: { icon: "star", value: "120" },
   },
   {
-    year: "2025",
     name: "Project Two",
-    madeAt: "Personal",
+    href: "#",
+    description:
+      "Another project worth highlighting — what makes it interesting, technically or otherwise.",
     stack: ["React", "Node.js", "Redis"],
-    href: "#",
-    linkLabel: "project-two.dev",
+    thumbnailGradient: ["#0f172a", "#1e293b"],
+    stat: { icon: "star", value: "48" },
   },
   {
-    year: "2025",
     name: "Project Three",
-    madeAt: "Personal",
-    stack: ["Python", "FastAPI"],
     href: "#",
-    linkLabel: "github.com",
+    description:
+      "A side project or open-source contribution that shows range beyond day-to-day work.",
+    stack: ["Python", "FastAPI"],
+    thumbnailGradient: ["#0a0e14", "#1c2430"],
+    stat: { icon: "download", value: "2.1k" },
   },
   {
-    year: "2024",
     name: "Project Four",
-    madeAt: "Personal",
-    stack: ["Next.js", "Tailwind", "Vercel"],
     href: "#",
-    linkLabel: "project-four.dev",
+    description:
+      "One more project slot — swap, add, or remove entries freely in the data file.",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    thumbnailGradient: ["#c6ff3d", "#0a0e14"],
+    stat: { icon: "star", value: "8.2k" },
   },
 ];
 
@@ -190,6 +254,8 @@ export type BlogPost = {
   title: string;
   date: string;
   href: string;
+  category?: string;
+  description?: string;
   thumbnailGradient?: [string, string];
 };
 
@@ -198,18 +264,27 @@ export const blogPosts: BlogPost[] = [
     title: "Add your first post title here",
     date: "2026",
     href: "#",
+    category: "Blog",
+    description:
+      "A short summary of what this post covers — swap this for your real excerpt.",
     thumbnailGradient: ["#c6ff3d", "#0a0e14"],
   },
   {
     title: "Add your second post title here",
     date: "2026",
     href: "#",
+    category: "Blog",
+    description:
+      "A short summary of what this post covers — swap this for your real excerpt.",
     thumbnailGradient: ["#22d3ee", "#0f172a"],
   },
   {
     title: "Add your third post title here",
     date: "2026",
     href: "#",
+    category: "Blog",
+    description:
+      "A short summary of what this post covers — swap this for your real excerpt.",
     thumbnailGradient: ["#f97316", "#0a0e14"],
   },
 ];

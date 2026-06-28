@@ -1,12 +1,17 @@
+import Link from "next/link";
 import { blogPosts } from "@/data/content";
 import { Section } from "@/components/Section";
-import { ExternalLinkIcon } from "@/components/icons";
+import { ExternalLinkIcon, ArrowRightIcon } from "@/components/icons";
+
+const PREVIEW_COUNT = 3;
 
 export function Blog() {
+  const preview = blogPosts.slice(0, PREVIEW_COUNT);
+
   return (
     <Section id="blog" label="blog">
       <ul className="max-w-xl space-y-4">
-        {blogPosts.map((post) => (
+        {preview.map((post) => (
           <li key={post.title}>
             <a
               href={post.href}
@@ -37,6 +42,14 @@ export function Blog() {
           </li>
         ))}
       </ul>
+
+      <Link
+        href="/blog"
+        className="group mt-8 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.15em] text-ink-bright transition-colors hover:text-accent"
+      >
+        View all posts
+        <ArrowRightIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+      </Link>
     </Section>
   );
 }

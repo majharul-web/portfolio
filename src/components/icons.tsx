@@ -222,6 +222,109 @@ export function PenIcon({ className }: IconProps) {
   );
 }
 
+export function HomeIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-8.5Z"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function LayoutIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="3.5" y="4" width="17" height="16" rx="2" />
+      <path d="M3.5 9.5h17" />
+      <path d="M9 9.5V20" />
+    </svg>
+  );
+}
+
+export function ServerIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="3.5" y="4" width="17" height="6" rx="1.5" />
+      <rect x="3.5" y="14" width="17" height="6" rx="1.5" />
+      <path d="M7 7h.01M7 17h.01" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function DatabaseIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className={className}
+      aria-hidden="true"
+    >
+      <ellipse cx="12" cy="5.5" rx="8" ry="3" />
+      <path d="M4 5.5V12c0 1.66 3.58 3 8 3s8-1.34 8-3V5.5" />
+      <path d="M4 12v6.5c0 1.66 3.58 3 8 3s8-1.34 8-3V12" />
+    </svg>
+  );
+}
+
+export function PuzzleIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        d="M9 4.5h3a1.5 1.5 0 0 1 1.5 1.5v2a1.5 1.5 0 0 0 3 0 1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5 1.5 1.5 0 0 0 0 3 1.5 1.5 0 0 1 1.5 1.5v2a1.5 1.5 0 0 1-1.5 1.5h-3a1.5 1.5 0 0 1 0-3 1.5 1.5 0 0 0 0-3H6a1.5 1.5 0 0 1-1.5-1.5v-3A1.5 1.5 0 0 1 6 9a1.5 1.5 0 0 0 0-3 1.5 1.5 0 0 1 1.5-1.5H9Z"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function ArrowUpRightIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M7 17 17 7" strokeLinecap="round" />
+      <path d="M8 7h9v9" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export const iconMap = {
   github: GithubIcon,
   linkedin: LinkedinIcon,

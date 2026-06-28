@@ -77,7 +77,7 @@ export function CursorGlow() {
     <div
       ref={glowRef}
       aria-hidden="true"
-      className="cursor-glow pointer-events-none fixed inset-0 z-0 hidden lg:block"
+      className="cursor-glow pointer-events-none fixed inset-0 z-[25] hidden lg:block"
     />
   );
 }

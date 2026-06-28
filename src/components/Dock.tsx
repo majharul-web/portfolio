@@ -1,27 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { nav, socials } from "@/data/content";
-import { useActiveSection } from "@/lib/useActiveSection";
+import { dockNav, socials } from "@/data/content";
 import {
   iconMap,
   SunIcon,
   MoonIcon,
+  HomeIcon,
   UserIcon,
-  BriefcaseIcon,
   FolderIcon,
   PenIcon,
 } from "@/components/icons";
 
 const navIconMap = {
+  home: HomeIcon,
   about: UserIcon,
-  experience: BriefcaseIcon,
-  projects: FolderIcon,
+  archive: FolderIcon,
   blog: PenIcon,
 } as const;
-
-const sectionIds = nav.map((item) => item.id);
 
 type DockItemProps = {
   label: string;
@@ -36,7 +35,9 @@ type DockItemProps = {
  * A single dock icon. Scale is computed by the parent based on distance
  * from the hovered index (macOS-dock style magnification) and applied
  * via inline transform so neighbours can react too, not just the
- * hovered item itself.
+ * hovered item itself. Internal routes (starting with "/") use next/link
+ * for client-side transitions; external links use a plain anchor that
+ * opens in a new tab.
  */
 function DockItem({
   label,
@@ -72,16 +73,22 @@ function DockItem({
   );
 
   if (href) {
+    const isExternal = href.startsWith("http") || href.startsWith("mailto:");
+
+    if (isExternal) {
+      return (
+        <a href={href} target="_blank" rel="noreferrer" {...sharedProps}>
+          {children}
+          {tooltip}
+        </a>
+      );
+    }
+
     return (
-      <a
-        href={href}
-        target={href.startsWith("http") ? "_blank" : undefined}
-        rel={href.startsWith("http") ? "noreferrer" : undefined}
-        {...sharedProps}
-      >
+      <Link href={href} {...sharedProps}>
         {children}
         {tooltip}
-      </a>
+      </Link>
     );
   }
 
@@ -94,7 +101,7 @@ function DockItem({
 }
 
 export function Dock() {
-  const activeId = useActiveSection(sectionIds);
+  const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -114,12 +121,13 @@ export function Dock() {
   }, []);
 
   const items = [
-    ...nav.map((item) => ({
+    ...dockNav.map((item) => ({
       kind: "nav" as const,
       key: item.id,
       label: item.label,
-      href: `/#${item.id}`,
-      isActive: activeId === item.id,
+      href: item.href,
+      isActive:
+        item.href === "/" ? pathname === "/" : pathname.startsWith(item.href),
     })),
     {
       kind: "divider" as const,
@@ -156,10 +164,10 @@ export function Dock() {
   return (
     <nav
       aria-label="Quick navigation"
-      className="sticky top-0 z-20 flex justify-center px-4 py-4"
+      className="sticky top-0 z-30 flex justify-center px-4 py-4"
     >
       <ul
-        className="flex items-end gap-1 rounded-2xl border border-hairline bg-panel/90 px-3 py-2 shadow-lg shadow-black/10 backdrop-blur-md"
+        className="flex items-end gap-1 rounded-2xl border border-hairline bg-panel px-3 py-2 shadow-lg shadow-black/20 backdrop-blur-md"
         onMouseLeave={() => setHoveredIndex(null)}
       >
         {items.map((item, index) => {
