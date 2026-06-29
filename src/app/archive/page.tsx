@@ -3,6 +3,7 @@ import Link from "next/link";
 import { archiveProjects, profile } from "@/data/content";
 import { ArrowLeftIcon } from "@/components/icons";
 import { ProjectCard } from "@/components/ProjectCard";
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: `All Projects — ${profile.name}`,
@@ -31,6 +32,8 @@ export default function ArchivePage() {
           </li>
         ))}
       </ul>
+
+      <Footer />
     </main>
   );
 }

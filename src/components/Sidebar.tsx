@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { nav, profile, socials } from "@/data/content";
 import { useActiveSection } from "@/lib/useActiveSection";
-import { iconMap, ExternalLinkIcon } from "@/components/icons";
+import { iconMap, ExternalLinkIcon, MailIcon, MapPinIcon } from "@/components/icons";
 import { GradientButton } from "@/components/GradientButton";
 
 const sectionIds = nav.map((item) => item.id);
@@ -39,7 +39,7 @@ export function Sidebar() {
   const animate = prefersReducedMotion ? undefined : "visible";
 
   return (
-    <header className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-[40%] lg:max-w-[480px] lg:flex-col lg:justify-between lg:py-24 px-6 sm:px-12 lg:px-0 lg:pl-12 xl:pl-24 pt-16 pb-10">
+    <header className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-[40%] lg:max-w-[480px] lg:flex-col lg:justify-between lg:py-24 px-6 sm:px-12 lg:px-0 lg:pl-10 xl:pl-22 pt-16 pb-10">
       <motion.div
         initial={initial}
         animate={animate}
@@ -86,6 +86,23 @@ export function Sidebar() {
         >
           {profile.tagline}
         </motion.p>
+
+        <motion.div
+          variants={variants}
+          className="mt-4 space-y-1.5 font-mono text-xs text-ink-muted"
+        >
+          <a
+            href={`mailto:${profile.email}`}
+            className="flex items-center gap-2 transition-colors hover:text-accent"
+          >
+            <MailIcon className="h-3.5 w-3.5" />
+            {profile.email}
+          </a>
+          <p className="flex items-center gap-2">
+            <MapPinIcon className="h-3.5 w-3.5" />
+            {profile.location}
+          </p>
+        </motion.div>
 
         <motion.div variants={variants} className="mt-6">
           <GradientButton href={profile.resumeHref} external>

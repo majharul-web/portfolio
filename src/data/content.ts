@@ -7,9 +7,11 @@ export const profile = {
   name: "Majharul Islam",
   role: "Software Engineer",
   tagline: "I build fast, accessible web apps with clean, maintainable code.",
-  email: "hello@example.com",
+  email: "majharul.live@gmail.com",
+  phone: "+880 1747-615357",
   location: "Dhaka, Bangladesh",
-  resumeHref: "/resume.pdf",
+  resumeHref:
+    "https://drive.google.com/file/d/1s-5dAuqEBIiFd99p67RcLK7feC6xyxpN/view",
   avatarSrc: "/images/profile.jpg",
 };
 
@@ -30,14 +32,21 @@ export const dockNav = [
 ] as const;
 
 export const socials = [
-  { label: "GitHub", href: "https://github.com/your-handle", icon: "github" },
+  {
+    label: "GitHub",
+    href: "https://github.com/majharul-web",
+    icon: "github",
+  },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/in/your-handle",
+    href: "https://www.linkedin.com/in/majharul-web/",
     icon: "linkedin",
   },
-  { label: "Twitter", href: "https://twitter.com/your-handle", icon: "x" },
-  { label: "Email", href: "mailto:hello@example.com", icon: "mail" },
+  {
+    label: "LeetCode",
+    href: "https://leetcode.com/u/majharul-web/",
+    icon: "leetcode",
+  },
 ] as const;
 
 export const about = {

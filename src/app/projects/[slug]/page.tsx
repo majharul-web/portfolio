@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { allProjects, profile } from "@/data/content";
 import { ArrowLeftIcon, ExternalLinkIcon, GithubIcon } from "@/components/icons";
 import { GradientButton } from "@/components/GradientButton";
+import { Footer } from "@/components/Footer";
 
 export async function generateStaticParams() {
   return allProjects.map((project) => ({ slug: project.slug }));
@@ -145,6 +146,8 @@ export default async function ProjectDetailsPage({
           <p className="mt-3">{project.challenges}</p>
         </section>
       </div>
+
+      <Footer />
     </main>
   );
 }

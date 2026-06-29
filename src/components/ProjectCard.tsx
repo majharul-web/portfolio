@@ -1,7 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { ProjectEntry } from "@/data/content";
-import { ExternalLinkIcon, StarIcon, DownloadIcon } from "@/components/icons";
+import {
+  ExternalLinkIcon,
+  ArrowUpRightIcon,
+  StarIcon,
+  DownloadIcon,
+} from "@/components/icons";
 
 type ProjectCardProps = {
   project: ProjectEntry;
@@ -35,31 +40,38 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </Link>
 
       <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2">
-          <h3 className="min-w-0">
-            <Link
-              href={`/projects/${project.slug}`}
-              className="font-medium text-ink-bright transition-colors hover:text-accent"
-            >
-              {project.name}
-            </Link>
-          </h3>
+        <h3>
+          <Link
+            href={`/projects/${project.slug}`}
+            className="font-medium text-ink-bright transition-colors hover:text-accent"
+          >
+            {project.name}
+          </Link>
+        </h3>
+        <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">
+          {project.description}
+        </p>
+
+        <div className="mt-3 flex flex-wrap items-center gap-2">
           {hasLiveLink && (
             <a
               href={project.href}
               target="_blank"
               rel="noreferrer"
-              aria-label={`Open ${project.name} live site`}
-              title="Open live site"
-              className="inline-flex shrink-0 items-center text-ink-muted transition-colors hover:text-accent"
+              className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-panel px-3 py-1.5 text-xs text-ink transition-colors hover:border-accent hover:text-ink-bright"
             >
               <ExternalLinkIcon className="h-3.5 w-3.5" />
+              Live site
             </a>
           )}
+          <Link
+            href={`/projects/${project.slug}`}
+            className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-panel px-3 py-1.5 text-xs text-ink transition-colors hover:border-accent hover:text-ink-bright"
+          >
+            <ArrowUpRightIcon className="h-3.5 w-3.5" />
+            Details
+          </Link>
         </div>
-        <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">
-          {project.description}
-        </p>
 
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
           {project.stat && (

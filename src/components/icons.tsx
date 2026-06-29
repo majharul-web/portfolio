@@ -325,9 +325,64 @@ export function ArrowUpRightIcon({ className }: IconProps) {
   );
 }
 
+export function PhoneIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        d="M6.5 4h2.7l1.3 4.2-2 1.6a11 11 0 0 0 5.7 5.7l1.6-2 4.2 1.3v2.7c0 1-.8 1.8-1.8 1.7C12.4 18.6 5.4 11.6 4.8 5.8 4.7 4.8 5.5 4 6.5 4Z"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function LeetCodeIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M9.5 5 4 12l5.5 7" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M14.5 5 20 12l-5.5 7" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M11 9.5h2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function MapPinIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"
+        strokeLinejoin="round"
+      />
+      <circle cx="12" cy="9" r="2.3" />
+    </svg>
+  );
+}
+
 export const iconMap = {
   github: GithubIcon,
   linkedin: LinkedinIcon,
   x: XIcon,
   mail: MailIcon,
+  leetcode: LeetCodeIcon,
 } as const;

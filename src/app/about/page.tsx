@@ -4,7 +4,9 @@ import { profile } from "@/data/content";
 import { ArrowLeftIcon } from "@/components/icons";
 import { About } from "@/components/About";
 import { WhatIDo } from "@/components/WhatIDo";
+import { Skills } from "@/components/Skills";
 import { Experience } from "@/components/Experience";
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: `About — ${profile.name}`,
@@ -29,8 +31,11 @@ export default function AboutPage() {
       <div className="mt-12 space-y-16">
         <About showPhoto />
         <WhatIDo />
-        <Experience />
+        <Skills full />
+        <Experience full />
       </div>
+
+      <Footer />
     </main>
   );
 }

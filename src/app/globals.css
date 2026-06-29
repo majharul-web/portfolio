@@ -122,6 +122,31 @@ body {
     --gradient-angle: 360deg;
   }
 }
+
+/* Subtle static dot-grid texture for the footer's "Get in Touch" panel —
+   a one-off decorative background, unlike NoiseHeader's animated canvas
+   version, so it's just a lightweight radial-gradient pattern. */
+.footer-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-ink) 14%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 16px 16px;
+  mask-image: radial-gradient(
+    ellipse 70% 70% at 50% 0%,
+    black,
+    transparent
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 70% at 50% 0%,
+    black,
+    transparent
+  );
+}
 .content-scroll::-webkit-scrollbar-track {
   background: transparent;
 }

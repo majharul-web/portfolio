@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { blogPosts, profile } from "@/data/content";
 import { ArrowLeftIcon } from "@/components/icons";
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: `Blog — ${profile.name}`,
@@ -74,6 +75,8 @@ export default function BlogPage() {
           </li>
         ))}
       </ul>
+
+      <Footer />
     </main>
   );
 }
