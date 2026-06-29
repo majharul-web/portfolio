@@ -123,6 +123,32 @@ body {
   }
 }
 
+/* Idle attention nudge for the trailing icon on GradientButton — a
+   small recurring sideways tap, independent of (and paused during)
+   the hover-triggered translate, drawing the eye to the CTA without
+   needing a hover to notice it. */
+.gradient-button-icon {
+  animation: gradient-button-icon-nudge 2.2s ease-in-out infinite;
+}
+
+.group:hover .gradient-button-icon {
+  animation: none;
+}
+
+@keyframes gradient-button-icon-nudge {
+  0%,
+  60%,
+  100% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+  90% {
+    transform: translateX(0);
+  }
+}
+
 /* Subtle static dot-grid texture for the footer's "Get in Touch" panel —
    a one-off decorative background, unlike NoiseHeader's animated canvas
    version, so it's just a lightweight radial-gradient pattern. */

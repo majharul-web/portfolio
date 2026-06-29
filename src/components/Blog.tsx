@@ -55,9 +55,11 @@ export function Blog() {
       </ul>
 
       <div className="mt-8">
-        <GradientButton href="/blog">
+        <GradientButton
+          href="/blog"
+          icon={<ArrowRightIcon className="h-3.5 w-3.5" />}
+        >
           View all posts
-          <ArrowRightIcon className="h-3.5 w-3.5" />
         </GradientButton>
       </div>
     </Section>

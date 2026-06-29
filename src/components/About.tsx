@@ -20,14 +20,8 @@ export function About({ showPhoto = false }: AboutProps) {
             : undefined
         }
       >
-        <div className="max-w-xl space-y-4 text-[15px] leading-relaxed text-ink">
-          {about.paragraphs.map((paragraph, i) => (
-            <p key={i}>{renderEmphasis(paragraph)}</p>
-          ))}
-        </div>
-
         {showPhoto && (
-          <div className="shrink-0 sm:order-last">
+          <div className="flex justify-center sm:order-last sm:block sm:shrink-0">
             <div className="h-40 w-40 overflow-hidden rounded-xl ring-1 ring-hairline sm:h-48 sm:w-48">
               <Image
                 src={profile.avatarSrc}
@@ -39,6 +33,12 @@ export function About({ showPhoto = false }: AboutProps) {
             </div>
           </div>
         )}
+
+        <div className="max-w-xl space-y-4 text-[15px] leading-relaxed text-ink">
+          {about.paragraphs.map((paragraph, i) => (
+            <p key={i}>{renderEmphasis(paragraph)}</p>
+          ))}
+        </div>
       </div>
     </Section>
   );

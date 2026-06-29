@@ -16,7 +16,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const hasLiveLink = Boolean(project.href && project.href !== "#");
 
   return (
-    <div className="relative flex gap-4 rounded-lg p-2 -m-2 transition-colors hover:bg-panel sm:gap-5">
+    <div className="relative flex cursor-pointer gap-4 rounded-lg p-2 -m-2 transition-colors hover:bg-panel sm:gap-5">
       {/* Stretched-link overlay: makes the whole card clickable to the
           details page. Sits behind the explicit buttons (z-0 vs their
           implicit higher stacking via relative + the browser's normal

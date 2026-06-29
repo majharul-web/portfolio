@@ -146,9 +146,11 @@ export function Experience({ full = false }: ExperienceProps) {
 
       {!full && (
         <div className="mt-6">
-          <GradientButton href="/about#experience">
+          <GradientButton
+            href="/about#experience"
+            icon={<ArrowRightIcon className="h-3.5 w-3.5" />}
+          >
             Full work history on /about
-            <ArrowRightIcon className="h-3.5 w-3.5" />
           </GradientButton>
         </div>
       )}

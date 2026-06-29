@@ -32,9 +32,11 @@ export default function AboutPage() {
       <div className="mt-12 space-y-16">
         <About showPhoto />
 
-        <ResumeButton href={profile.resumeHref}>
+        <ResumeButton
+          href={profile.resumeHref}
+          icon={<ExternalLinkIcon className="h-4 w-4" />}
+        >
           View full résumé
-          <ExternalLinkIcon className="h-4 w-4" />
         </ResumeButton>
 
         <Skills full />

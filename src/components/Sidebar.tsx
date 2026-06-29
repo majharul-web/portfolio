@@ -105,9 +105,11 @@ export function Sidebar() {
         </motion.div>
 
         <motion.div variants={variants} className="mt-6">
-          <ResumeButton href={profile.resumeHref}>
+          <ResumeButton
+            href={profile.resumeHref}
+            icon={<ExternalLinkIcon className="h-3.5 w-3.5" />}
+          >
             View full résumé
-            <ExternalLinkIcon className="h-3.5 w-3.5" />
           </ResumeButton>
         </motion.div>
 
