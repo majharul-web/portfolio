@@ -16,10 +16,20 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const hasLiveLink = Boolean(project.href && project.href !== "#");
 
   return (
-    <div className="flex gap-4 rounded-lg p-2 -m-2 transition-colors hover:bg-panel sm:gap-5">
+    <div className="relative flex gap-4 rounded-lg p-2 -m-2 transition-colors hover:bg-panel sm:gap-5">
+      {/* Stretched-link overlay: makes the whole card clickable to the
+          details page. Sits behind the explicit buttons (z-0 vs their
+          implicit higher stacking via relative + the browser's normal
+          hit-testing of foreground content), so "Live site" and
+          "Details" still work as their own independent targets. */}
       <Link
         href={`/projects/${project.slug}`}
-        className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md ring-1 ring-hairline sm:h-24 sm:w-24"
+        aria-label={`View ${project.name} details`}
+        className="absolute inset-0 z-0"
+      />
+
+      <span
+        className="relative z-10 h-20 w-20 shrink-0 overflow-hidden rounded-md ring-1 ring-hairline sm:h-24 sm:w-24"
         style={
           project.thumbnailGradient
             ? {
@@ -37,22 +47,17 @@ export function ProjectCard({ project }: ProjectCardProps) {
             sizes="96px"
           />
         )}
-      </Link>
+      </span>
 
-      <div className="min-w-0 flex-1">
-        <h3>
-          <Link
-            href={`/projects/${project.slug}`}
-            className="font-medium text-ink-bright transition-colors hover:text-accent"
-          >
-            {project.name}
-          </Link>
+      <div className="relative z-10 min-w-0 flex-1">
+        <h3 className="pointer-events-none font-medium text-ink-bright">
+          {project.name}
         </h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">
+        <p className="pointer-events-none mt-1.5 text-sm leading-relaxed text-ink-muted">
           {project.description}
         </p>
 
-        <div className="mt-3 flex flex-wrap items-center gap-2">
+        <div className="relative z-10 mt-3 flex flex-wrap items-center gap-2">
           {hasLiveLink && (
             <a
               href={project.href}
@@ -73,7 +78,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </Link>
         </div>
 
-        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <div className="pointer-events-none mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
           {project.stat && (
             <span className="inline-flex items-center gap-1 font-mono text-[11px] text-ink-muted">
               {project.stat.icon === "star" ? (

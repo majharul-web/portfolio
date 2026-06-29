@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { profile } from "@/data/content";
-import { ArrowLeftIcon } from "@/components/icons";
+import { ArrowLeftIcon, ExternalLinkIcon } from "@/components/icons";
 import { About } from "@/components/About";
 import { WhatIDo } from "@/components/WhatIDo";
 import { Skills } from "@/components/Skills";
 import { Experience } from "@/components/Experience";
+import { ResumeButton } from "@/components/ResumeButton";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -30,9 +31,15 @@ export default function AboutPage() {
 
       <div className="mt-12 space-y-16">
         <About showPhoto />
-        <WhatIDo />
+
+        <ResumeButton href={profile.resumeHref}>
+          View full résumé
+          <ExternalLinkIcon className="h-4 w-4" />
+        </ResumeButton>
+
         <Skills full />
         <Experience full />
+        <WhatIDo />
       </div>
 
       <Footer />

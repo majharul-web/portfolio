@@ -147,6 +147,28 @@ body {
     transparent
   );
 }
+
+/* Shine sweep for the résumé CTA — a soft diagonal highlight that
+   slides across on hover, giving the solid accent button a bit of
+   life without resorting to the same rotating-border treatment used
+   by GradientButton elsewhere. */
+.resume-button-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    color-mix(in srgb, white 45%, transparent) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+
+.group:hover .resume-button-shine::after {
+  transform: translateX(120%);
+}
 .content-scroll::-webkit-scrollbar-track {
   background: transparent;
 }

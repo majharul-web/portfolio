@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { experience } from "@/data/content";
 import { Section } from "@/components/Section";
 import { ExternalLinkIcon, ArrowRightIcon } from "@/components/icons";
+import { GradientButton } from "@/components/GradientButton";
 
 const PREVIEW_BULLET_COUNT = 2;
 
@@ -20,6 +22,7 @@ export function Experience({ full = false }: ExperienceProps) {
   const [openIndices, setOpenIndices] = useState<Set<number>>(
     () => new Set([0])
   );
+  const prefersReducedMotion = useReducedMotion();
 
   const toggle = (index: number) => {
     setOpenIndices((current) => {
@@ -33,11 +36,16 @@ export function Experience({ full = false }: ExperienceProps) {
     });
   };
 
+  const allClosed = openIndices.size === 0;
+
   return (
     <Section id="experience" label="experience">
       <ol className="max-w-xl space-y-10">
         {experience.map((job, index) => {
           const isOpen = openIndices.has(index);
+          // Draw the eye to the first item when nothing is open yet —
+          // a gentle nudge animation suggesting "click here to start."
+          const isInviting = index === 0 && allClosed && !prefersReducedMotion;
           const bullets = full
             ? job.bullets
             : job.bullets.slice(0, PREVIEW_BULLET_COUNT);
@@ -71,13 +79,34 @@ export function Experience({ full = false }: ExperienceProps) {
                   aria-expanded={isOpen}
                   className="text-left"
                 >
-                  <h3 className="text-base font-medium text-ink-bright">
+                  <h3 className="flex items-center gap-2 text-base font-medium text-ink-bright">
                     {job.title}
-                    <ArrowRightIcon
-                      className={`ml-2 inline-block h-3.5 w-3.5 text-ink-muted transition-transform ${
-                        isOpen ? "rotate-90" : ""
+                    <motion.span
+                      animate={
+                        isOpen
+                          ? { rotate: 90 }
+                          : isInviting
+                            ? { rotate: 0, x: [0, 4, 0] }
+                            : { rotate: 0, x: 0 }
+                      }
+                      transition={
+                        isInviting
+                          ? {
+                              x: {
+                                duration: 1.1,
+                                repeat: Infinity,
+                                repeatDelay: 0.6,
+                                ease: "easeInOut",
+                              },
+                            }
+                          : { type: "spring", stiffness: 300, damping: 20 }
+                      }
+                      className={`inline-flex text-ink-muted ${
+                        isInviting ? "text-accent" : ""
                       }`}
-                    />
+                    >
+                      <ArrowRightIcon className="h-3.5 w-3.5" />
+                    </motion.span>
                   </h3>
                 </button>
                 <p className="mt-0.5 text-sm text-ink-muted">
@@ -116,12 +145,12 @@ export function Experience({ full = false }: ExperienceProps) {
       </ol>
 
       {!full && (
-        <a
-          href="/about#experience"
-          className="mt-6 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.15em] text-ink-bright transition-colors hover:text-accent"
-        >
-          Full work history on /about →
-        </a>
+        <div className="mt-6">
+          <GradientButton href="/about#experience">
+            Full work history on /about
+            <ArrowRightIcon className="h-3.5 w-3.5" />
+          </GradientButton>
+        </div>
       )}
     </Section>
   );

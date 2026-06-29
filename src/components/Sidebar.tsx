@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { nav, profile, socials } from "@/data/content";
 import { useActiveSection } from "@/lib/useActiveSection";
 import { iconMap, ExternalLinkIcon, MailIcon, MapPinIcon } from "@/components/icons";
-import { GradientButton } from "@/components/GradientButton";
+import { ResumeButton } from "@/components/ResumeButton";
 
 const sectionIds = nav.map((item) => item.id);
 
@@ -105,10 +105,10 @@ export function Sidebar() {
         </motion.div>
 
         <motion.div variants={variants} className="mt-6">
-          <GradientButton href={profile.resumeHref} external>
+          <ResumeButton href={profile.resumeHref}>
             View full résumé
             <ExternalLinkIcon className="h-3.5 w-3.5" />
-          </GradientButton>
+          </ResumeButton>
         </motion.div>
 
         <motion.nav
