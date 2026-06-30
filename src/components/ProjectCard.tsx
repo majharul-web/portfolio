@@ -1,12 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { ProjectEntry } from "@/data/content";
-import {
-  ExternalLinkIcon,
-  ArrowUpRightIcon,
-  StarIcon,
-  DownloadIcon,
-} from "@/components/icons";
+import { ExternalLinkIcon, ArrowUpRightIcon, StarIcon, DownloadIcon } from "@/components/icons";
 
 type ProjectCardProps = {
   project: ProjectEntry;
@@ -16,20 +11,18 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const hasLiveLink = Boolean(project.href && project.href !== "#");
 
   return (
-    <div className="relative flex cursor-pointer gap-4 rounded-lg p-2 -m-2 transition-colors hover:bg-panel sm:gap-5">
-      {/* Stretched-link overlay: makes the whole card clickable to the
-          details page. Sits behind the explicit buttons (z-0 vs their
-          implicit higher stacking via relative + the browser's normal
-          hit-testing of foreground content), so "Live site" and
-          "Details" still work as their own independent targets. */}
+    <div className="relative -m-2 flex cursor-pointer gap-4 rounded-lg p-2 transition-colors hover:bg-panel sm:gap-5">
+      {/* Stretched-link overlay: sits above the card chrome but below the
+          explicit action buttons. Non-interactive card content opts out of
+          pointer events so clicks fall through to this details link. */}
       <Link
         href={`/projects/${project.slug}`}
         aria-label={`View ${project.name} details`}
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-10 rounded-lg"
       />
 
       <span
-        className="relative z-10 h-20 w-20 shrink-0 overflow-hidden rounded-md ring-1 ring-hairline sm:h-24 sm:w-24"
+        className="pointer-events-none relative z-20 h-20 w-20 shrink-0 overflow-hidden rounded-md ring-1 ring-hairline sm:h-24 sm:w-24"
         style={
           project.thumbnailGradient
             ? {
@@ -39,25 +32,17 @@ export function ProjectCard({ project }: ProjectCardProps) {
         }
       >
         {project.thumbnail && (
-          <Image
-            src={project.thumbnail}
-            alt={project.name}
-            fill
-            className="object-cover"
-            sizes="96px"
-          />
+          <Image src={project.thumbnail} alt={project.name} fill className="object-cover" sizes="96px" />
         )}
       </span>
 
-      <div className="relative z-10 min-w-0 flex-1">
-        <h3 className="pointer-events-none font-medium text-ink-bright">
-          {project.name}
-        </h3>
+      <div className="pointer-events-none relative z-20 min-w-0 flex-1">
+        <h3 className="pointer-events-none font-medium text-ink-bright">{project.name}</h3>
         <p className="pointer-events-none mt-1.5 text-sm leading-relaxed text-ink-muted">
           {project.description}
         </p>
 
-        <div className="relative z-10 mt-3 flex flex-wrap items-center gap-2">
+        <div className="pointer-events-auto relative z-30 mt-3 flex flex-wrap items-center gap-2">
           {hasLiveLink && (
             <a
               href={project.href}

@@ -50,7 +50,7 @@ export const socials = [
 
 export const about = {
   paragraphs: [
-    "Results-driven Fullstack (Frontend-focused) Developer with 3.5+ years of experience building scalable, high-performing web applications using **Next.js**, **React**, **TypeScript**, **Redux**, and **Tailwind CSS**. Skilled at transforming complex business needs into clean, intuitive, and responsive interfaces while ensuring maintainability and performance.",
+    "Results-driven Fullstack (Frontend-focused) Developer with **4** years of experience building scalable, high-performing web applications using **Next.js**, **React**, **TypeScript**, **Redux**, and **Tailwind CSS**. Skilled at transforming complex business needs into clean, intuitive, and responsive interfaces while ensuring maintainability and performance.",
     "Experienced across OTA platforms, e-commerce systems, and enterprise dashboards, improving workflow efficiency and user experience. Over the past year, expanded backend expertise through hands-on work with **Python**, **Django**, **Node.js**, **Express.js**, **SQL**, and **MongoDB**, and contributed to backend API development at Citycom Travel using **Golang**, **Gin**, **GORM**, **MySQL**, **Redis**, and microservice architecture.",
     "Built multiple full-stack projects, strengthened system reliability, and optimized data-processing performance. Passionate about end-to-end development, clean architecture, and delivering solutions that drive meaningful business impact.",
     "Let's connect! I'm always excited to collaborate on impactful web development projects and innovative solutions.",
@@ -106,7 +106,7 @@ export type SkillCategory = {
 export const homeSkillCategories: SkillCategory[] = [
   {
     category: "Frontend",
-    items: ["TypeScript", "Next.js", "React", "Redux Toolkit", "Tailwind CSS", "RTK Query"],
+    items: ["TypeScript", "Next.js", "React", "Redux Toolkit", "Tailwind CSS"],
   },
   {
     category: "Backend & Tools",
@@ -114,7 +114,7 @@ export const homeSkillCategories: SkillCategory[] = [
   },
   {
     category: "Soft Skills",
-    items: ["Adaptability", "Problem-Solving", "Communication", "Teamwork", "Leadership"],
+    items: ["Adaptability", "Problem-Solving", "Communication", "Teamwork"],
   },
 ];
 
@@ -150,18 +150,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     category: "Database & Infrastructure",
-    items: [
-      "MySQL",
-      "PostgreSQL",
-      "MongoDB",
-      "Redis",
-      "Firebase",
-      "Docker",
-      "Git",
-      "Linux",
-      "Vercel",
-      "Netlify",
-    ],
+    items: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "Docker", "Git", "Linux", "Vercel", "Netlify"],
   },
   {
     category: "Soft Skills",

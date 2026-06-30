@@ -12,15 +12,15 @@ const PREVIEW_BULLET_COUNT = 2;
 type ExperienceProps = {
   /** Show the full bullet list for every expanded role. Off by
    * default — the homepage caps an expanded role to its top 2
-   * highlights; /about shows everything. Every role is independently
-   * expandable/collapsible on both, with the first one open by
-   * default. */
+   * highlights; /about shows everything. */
   full?: boolean;
+  /** Whether the first experience item should be expanded on initial render. */
+  defaultOpenFirst?: boolean;
 };
 
-export function Experience({ full = false }: ExperienceProps) {
-  const [openIndices, setOpenIndices] = useState<Set<number>>(
-    () => new Set([0])
+export function Experience({ full = false, defaultOpenFirst = false }: ExperienceProps) {
+  const [openIndices, setOpenIndices] = useState<Set<number>>(() =>
+    defaultOpenFirst ? new Set([0]) : new Set(),
   );
   const prefersReducedMotion = useReducedMotion();
 
@@ -36,19 +36,17 @@ export function Experience({ full = false }: ExperienceProps) {
     });
   };
 
-  const allClosed = openIndices.size === 0;
+  const invitingIndex = experience.findIndex((_, index) => !openIndices.has(index));
 
   return (
     <Section id="experience" label="experience">
-      <ol className="max-w-xl space-y-10">
+      <ol className="max-w-4xl space-y-6">
         {experience.map((job, index) => {
           const isOpen = openIndices.has(index);
-          // Draw the eye to the first item when nothing is open yet —
-          // a gentle nudge animation suggesting "click here to start."
-          const isInviting = index === 0 && allClosed && !prefersReducedMotion;
-          const bullets = full
-            ? job.bullets
-            : job.bullets.slice(0, PREVIEW_BULLET_COUNT);
+          // Gently hint toward the next unopened role so the interaction
+          // feels progressive: first item first, then the next, and so on.
+          const isInviting = index === invitingIndex && !prefersReducedMotion;
+          const bullets = full ? job.bullets : job.bullets.slice(0, PREVIEW_BULLET_COUNT);
 
           const company = job.href ? (
             <a
@@ -69,9 +67,7 @@ export function Experience({ full = false }: ExperienceProps) {
               key={`${job.company}-${job.title}-${job.range}`}
               className="group relative grid gap-1 sm:grid-cols-[120px_1fr] sm:gap-4"
             >
-              <p className="font-mono text-xs text-ink-muted sm:pt-1">
-                {job.range}
-              </p>
+              <p className="font-mono text-xs text-ink-muted sm:pt-1">{job.range}</p>
               <div>
                 <button
                   type="button"
@@ -83,27 +79,37 @@ export function Experience({ full = false }: ExperienceProps) {
                     {job.title}
                     <motion.span
                       animate={
-                        isOpen
-                          ? { rotate: 90 }
-                          : isInviting
-                            ? { rotate: 0, x: [0, 4, 0] }
-                            : { rotate: 0, x: 0 }
+                        prefersReducedMotion
+                          ? { rotate: isOpen ? 90 : 0, x: 0, y: 0 }
+                          : isOpen
+                            ? { rotate: 90, y: [0, 4, 0] }
+                            : isInviting
+                              ? { rotate: 0, x: [0, 4, 0], y: 0 }
+                              : { rotate: 0, x: 0, y: 0 }
                       }
                       transition={
-                        isInviting
+                        isOpen
                           ? {
-                              x: {
+                              rotate: { type: "spring", stiffness: 300, damping: 20 },
+                              y: {
                                 duration: 1.1,
                                 repeat: Infinity,
                                 repeatDelay: 0.6,
                                 ease: "easeInOut",
                               },
                             }
-                          : { type: "spring", stiffness: 300, damping: 20 }
+                          : isInviting
+                            ? {
+                                x: {
+                                  duration: 1.1,
+                                  repeat: Infinity,
+                                  repeatDelay: 0.6,
+                                  ease: "easeInOut",
+                                },
+                              }
+                            : { type: "spring", stiffness: 300, damping: 20 }
                       }
-                      className={`inline-flex text-ink-muted ${
-                        isInviting ? "text-accent" : ""
-                      }`}
+                      className={`inline-flex text-ink-muted ${isInviting ? "text-accent" : ""}`}
                     >
                       <ArrowRightIcon className="h-3.5 w-3.5" />
                     </motion.span>
@@ -111,9 +117,7 @@ export function Experience({ full = false }: ExperienceProps) {
                 </button>
                 <p className="mt-0.5 text-sm text-ink-muted">
                   {company}
-                  {job.location && (
-                    <span className="ml-2 text-xs">· {job.location}</span>
-                  )}
+                  {job.location && <span className="ml-2 text-xs">· {job.location}</span>}
                 </p>
 
                 {isOpen && (
@@ -146,10 +150,7 @@ export function Experience({ full = false }: ExperienceProps) {
 
       {!full && (
         <div className="mt-6">
-          <GradientButton
-            href="/about#experience"
-            icon={<ArrowRightIcon className="h-3.5 w-3.5" />}
-          >
+          <GradientButton href="/about#experience" icon={<ArrowRightIcon className="h-3.5 w-3.5" />}>
             Full work history on /about
           </GradientButton>
         </div>

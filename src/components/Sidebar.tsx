@@ -39,7 +39,7 @@ export function Sidebar() {
   const animate = prefersReducedMotion ? undefined : "visible";
 
   return (
-    <header className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-[40%] lg:max-w-[480px] lg:flex-col lg:justify-between lg:py-24 px-6 sm:px-12 lg:px-0 lg:pl-4 pt-16 pb-10">
+    <header className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-[40%] lg:max-w-[480px] lg:flex-col lg:justify-between lg:py-24 px-6 sm:px-12 lg:px-0 pt-16 pb-10">
       <motion.div initial={initial} animate={animate} variants={containerVariants}>
         <div className="flex items-start gap-5">
           <div>

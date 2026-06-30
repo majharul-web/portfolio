@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="relative mx-auto min-h-screen max-w-6xl lg:flex">
       <Sidebar />
-      <main className="relative z-10 px-6 pb-16 sm:px-12 lg:w-[60%] lg:py-12 lg:pl-10 lg:pr-4">
+      <main className="relative z-10 px-6 pb-16 sm:px-12 lg:w-[60%] lg:py-12 lg:pl-14">
         <Skills categories={homeSkillCategories} />
         <Experience />
         <Projects />
