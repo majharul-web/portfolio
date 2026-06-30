@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { ExternalLinkIcon, iconMap, MailIcon, MapPinIcon } from "@/components/icons";
+import { ResumeButton } from "@/components/ResumeButton";
 import { nav, profile, socials } from "@/data/content";
 import { useActiveSection } from "@/lib/useActiveSection";
-import { iconMap, ExternalLinkIcon, MailIcon, MapPinIcon } from "@/components/icons";
-import { ResumeButton } from "@/components/ResumeButton";
+import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 
 const sectionIds = nav.map((item) => item.id);
 
@@ -39,18 +39,11 @@ export function Sidebar() {
   const animate = prefersReducedMotion ? undefined : "visible";
 
   return (
-    <header className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-[40%] lg:max-w-[480px] lg:flex-col lg:justify-between lg:py-24 px-6 sm:px-12 lg:px-0 lg:pl-10 xl:pl-22 pt-16 pb-10">
-      <motion.div
-        initial={initial}
-        animate={animate}
-        variants={containerVariants}
-      >
+    <header className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-[40%] lg:max-w-[480px] lg:flex-col lg:justify-between lg:py-24 px-6 sm:px-12 lg:px-0 lg:pl-4 pt-16 pb-10">
+      <motion.div initial={initial} animate={animate} variants={containerVariants}>
         <div className="flex items-start gap-5">
           <div>
-            <motion.p
-              variants={variants}
-              className="font-mono text-xs text-accent"
-            >
+            <motion.p variants={variants} className="font-mono text-xs text-accent">
               {"// hello, I'm"}
             </motion.p>
             <motion.h1
@@ -74,23 +67,14 @@ export function Sidebar() {
             />
           </motion.div>
         </div>
-        <motion.h2
-          variants={variants}
-          className="mt-2 text-lg sm:text-xl font-medium text-ink"
-        >
+        <motion.h2 variants={variants} className="mt-2 text-lg sm:text-xl font-medium text-ink">
           {profile.role}
         </motion.h2>
-        <motion.p
-          variants={variants}
-          className="mt-4 max-w-xs text-sm leading-relaxed text-ink-muted"
-        >
+        <motion.p variants={variants} className="mt-4 max-w-xs text-sm leading-relaxed text-ink-muted">
           {profile.tagline}
         </motion.p>
 
-        <motion.div
-          variants={variants}
-          className="mt-4 space-y-1.5 font-mono text-xs text-ink-muted"
-        >
+        <motion.div variants={variants} className="mt-4 space-y-1.5 font-mono text-xs text-ink-muted">
           <a
             href={`mailto:${profile.email}`}
             className="flex items-center gap-2 transition-colors hover:text-accent"
@@ -105,28 +89,18 @@ export function Sidebar() {
         </motion.div>
 
         <motion.div variants={variants} className="mt-6">
-          <ResumeButton
-            href={profile.resumeHref}
-            icon={<ExternalLinkIcon className="h-3.5 w-3.5" />}
-          >
+          <ResumeButton href={profile.resumeHref} icon={<ExternalLinkIcon className="h-3.5 w-3.5" />}>
             View full résumé
           </ResumeButton>
         </motion.div>
 
-        <motion.nav
-          variants={variants}
-          aria-label="In-page"
-          className="mt-12 hidden lg:block"
-        >
+        <motion.nav variants={variants} aria-label="In-page" className="mt-12 hidden lg:block">
           <ul className="space-y-1">
             {nav.map((navItem) => {
               const isActive = activeId === navItem.id;
               return (
                 <li key={navItem.id}>
-                  <a
-                    href={`#${navItem.id}`}
-                    className="group flex items-center gap-3 py-2"
-                  >
+                  <a href={`#${navItem.id}`} className="group flex items-center gap-3 py-2">
                     <span
                       className={`h-px transition-all duration-300 ${
                         isActive
@@ -136,9 +110,7 @@ export function Sidebar() {
                     />
                     <span
                       className={`font-mono text-xs uppercase tracking-[0.2em] transition-colors duration-300 ${
-                        isActive
-                          ? "text-ink-bright"
-                          : "text-ink-muted group-hover:text-ink-bright"
+                        isActive ? "text-ink-bright" : "text-ink-muted group-hover:text-ink-bright"
                       }`}
                     >
                       {navItem.label}

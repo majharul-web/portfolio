@@ -1,23 +1,23 @@
-import { skillCategories } from "@/data/content";
+import { skillCategories, type SkillCategory } from "@/data/content";
 import { Section } from "@/components/Section";
 
-const PREVIEW_ITEMS_PER_CATEGORY = 4;
+const PREVIEW_ITEMS_PER_CATEGORY = 5;
 
 type SkillsProps = {
   /** Show every skill in every category. Off by default — the
    * homepage shows a trimmed quick-scan version; /about shows
    * everything. */
   full?: boolean;
+  /** Override which categories to display. Defaults to all skillCategories. */
+  categories?: SkillCategory[];
 };
 
-export function Skills({ full = false }: SkillsProps) {
+export function Skills({ full = false, categories = skillCategories }: SkillsProps) {
   return (
     <Section id="skills" label="skills">
       <div className="max-w-xl space-y-6">
-        {skillCategories.map((category) => {
-          const items = full
-            ? category.items
-            : category.items.slice(0, PREVIEW_ITEMS_PER_CATEGORY);
+        {categories.map((category) => {
+          const items = full ? category.items : category.items.slice(0, PREVIEW_ITEMS_PER_CATEGORY);
           const hiddenCount = category.items.length - items.length;
 
           return (

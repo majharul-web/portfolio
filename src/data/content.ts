@@ -10,8 +10,7 @@ export const profile = {
   email: "majharul.live@gmail.com",
   phone: "+880 1747-615357",
   location: "Dhaka, Bangladesh",
-  resumeHref:
-    "https://drive.google.com/file/d/1s-5dAuqEBIiFd99p67RcLK7feC6xyxpN/view",
+  resumeHref: "https://drive.google.com/file/d/1s-5dAuqEBIiFd99p67RcLK7feC6xyxpN/view",
   avatarSrc: "/images/profile.jpg",
 };
 
@@ -104,56 +103,69 @@ export type SkillCategory = {
   items: string[];
 };
 
+export const homeSkillCategories: SkillCategory[] = [
+  {
+    category: "Frontend",
+    items: ["TypeScript", "Next.js", "React", "Redux Toolkit", "Tailwind CSS", "RTK Query"],
+  },
+  {
+    category: "Backend & Tools",
+    items: ["Golang", "Python", "MySQL", "Microservices", "Docker"],
+  },
+  {
+    category: "Soft Skills",
+    items: ["Adaptability", "Problem-Solving", "Communication", "Teamwork", "Leadership"],
+  },
+];
+
 export const skillCategories: SkillCategory[] = [
   {
-    category: "Programming Languages",
-    items: ["JavaScript", "TypeScript", "Python", "Golang", "C", "C++"],
+    category: "Languages",
+    items: ["TypeScript", "JavaScript", "Python", "Golang"],
   },
   {
     category: "Frontend",
     items: [
-      "React.js",
       "Next.js",
+      "React",
       "Redux Toolkit",
       "RTK Query",
-      "React Router",
       "Tailwind CSS",
+      "React Router",
       "Bootstrap",
       "Formik",
-      "Yup",
     ],
   },
   {
     category: "Backend",
-    items: ["Golang", "Django", "Node.js", "Express.js", "JWT Auth", "Microservices (Basic)"],
+    items: [
+      "Golang (Gin, GORM)",
+      "Django",
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "JWT Auth",
+      "Microservices",
+    ],
   },
   {
-    category: "Database & Tools",
+    category: "Database & Infrastructure",
     items: [
       "MySQL",
-      "PostgreSQL (Basic)",
+      "PostgreSQL",
       "MongoDB",
+      "Redis",
       "Firebase",
-      "Git",
       "Docker",
+      "Git",
       "Linux",
-      "Jira",
-      "Slack",
-      "VS Code",
-      "Chrome DevTools",
       "Vercel",
       "Netlify",
     ],
   },
   {
     category: "Soft Skills",
-    items: [
-      "Leadership",
-      "Teamwork",
-      "Problem-Solving",
-      "Communication",
-      "Adaptability",
-    ],
+    items: ["Adaptability", "Problem-Solving", "Communication", "Teamwork", "Leadership"],
   },
 ];
 
@@ -332,8 +344,7 @@ export const allProjects: ProjectEntry[] = [
       "Built responsive layouts with Daisy UI and Tailwind CSS, providing a visually appealing and responsive experience across devices.",
       "Developed a backend with Express.js and MongoDB to manage user data, posts, likes, and comments efficiently.",
     ],
-    outcome:
-      "Delivered an interactive photo-sharing platform that fosters social engagement.",
+    outcome: "Delivered an interactive photo-sharing platform that fosters social engagement.",
     challenges:
       "One challenge was optimizing the backend to handle traffic, which was mitigated by implementing data pagination and optimizing database queries.",
     clientCode: "https://github.com/majharul-web/photo-book-client",
@@ -365,7 +376,7 @@ export const allProjects: ProjectEntry[] = [
 // The full set above (`allProjects`) is what /archive and the project
 // details pages draw from.
 export const projects: ProjectEntry[] = allProjects.filter((project) =>
-  ["shohorbari", "travelkeep", "photo-book"].includes(project.slug)
+  ["shohorbari", "travelkeep", "photo-book"].includes(project.slug),
 );
 
 export const projectsArchiveHref = "/archive";
