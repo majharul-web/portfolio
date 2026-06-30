@@ -10,7 +10,7 @@ import { ResumeButton } from "@/components/ResumeButton";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: `About — ${profile.name}`,
+  title: "About",
   description: `${profile.role} — background and work history.`,
 };
 

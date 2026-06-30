@@ -2,8 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { allProjects, profile } from "@/data/content";
-import { ArrowLeftIcon, ExternalLinkIcon, GithubIcon } from "@/components/icons";
+import { allProjects } from "@/data/content";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ExternalLinkIcon,
+  GithubIcon,
+} from "@/components/icons";
 import { GradientButton } from "@/components/GradientButton";
 import { Footer } from "@/components/Footer";
 
@@ -20,11 +25,11 @@ export async function generateMetadata({
   const project = allProjects.find((p) => p.slug === slug);
 
   if (!project) {
-    return { title: `Project not found — ${profile.name}` };
+    return { title: "Project not found" };
   }
 
   return {
-    title: `${project.name} — ${profile.name}`,
+    title: project.name,
     description: project.description,
   };
 }
@@ -35,11 +40,19 @@ export default async function ProjectDetailsPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = allProjects.find((p) => p.slug === slug);
+  const projectIndex = allProjects.findIndex((p) => p.slug === slug);
+  const project = allProjects[projectIndex];
 
   if (!project) {
     notFound();
   }
+
+  const previousProject =
+    projectIndex > 0 ? allProjects[projectIndex - 1] : undefined;
+  const nextProject =
+    projectIndex < allProjects.length - 1
+      ? allProjects[projectIndex + 1]
+      : undefined;
 
   return (
     <main className="relative z-10 mx-auto max-w-4xl px-6 py-16 sm:px-12 lg:px-0 lg:py-24">
@@ -146,6 +159,45 @@ export default async function ProjectDetailsPage({
           <p className="mt-3">{project.challenges}</p>
         </section>
       </div>
+
+      {(previousProject || nextProject) && (
+        <nav
+          aria-label="More projects"
+          className="mt-16 flex items-center justify-between gap-4 border-t border-hairline pt-8"
+        >
+          {previousProject ? (
+            <Link
+              href={`/projects/${previousProject.slug}`}
+              className="group flex min-w-0 flex-col items-start gap-1"
+            >
+              <span className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.15em] text-ink-muted transition-colors group-hover:text-accent">
+                <ArrowLeftIcon className="h-3 w-3 transition-transform group-hover:-translate-x-1" />
+                Previous
+              </span>
+              <span className="truncate text-sm font-medium text-ink-bright">
+                {previousProject.name}
+              </span>
+            </Link>
+          ) : (
+            <span />
+          )}
+
+          {nextProject && (
+            <Link
+              href={`/projects/${nextProject.slug}`}
+              className="group flex min-w-0 flex-col items-end gap-1 text-right"
+            >
+              <span className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.15em] text-ink-muted transition-colors group-hover:text-accent">
+                Next
+                <ArrowRightIcon className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+              </span>
+              <span className="truncate text-sm font-medium text-ink-bright">
+                {nextProject.name}
+              </span>
+            </Link>
+          )}
+        </nav>
+      )}
 
       <Footer />
     </main>

@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { NoiseHeader } from "@/components/NoiseHeader";
 import { Dock } from "@/components/Dock";
 import { CursorGlow } from "@/components/CursorGlow";
+import { profile } from "@/data/content";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,10 +25,30 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const siteUrl = "https://majharul.vercel.app";
+const title = `${profile.name} — ${profile.role}`;
+const description =
+  "Full-stack (frontend-focused) software engineer building accessible, scalable web applications with Next.js, React, and TypeScript.";
+
 export const metadata: Metadata = {
-  title: "Majharul Islam — Software Engineer",
-  description:
-    "Software engineer building accessible, scalable web applications.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: title,
+    template: `%s — ${profile.name}`,
+  },
+  description,
+  openGraph: {
+    title,
+    description,
+    url: siteUrl,
+    siteName: profile.name,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({

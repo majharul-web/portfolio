@@ -6,7 +6,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: `All Projects — ${profile.name}`,
+  title: "All Projects",
   description: `Every project ${profile.name} has shipped, in one place.`,
 };
 

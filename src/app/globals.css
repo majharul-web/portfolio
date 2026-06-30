@@ -89,11 +89,6 @@ body {
   transition: opacity 0.4s ease;
 }
 
-/* Thin custom scrollbar for the content column */
-.content-scroll::-webkit-scrollbar {
-  width: 8px;
-}
-
 /* Animated rotating gradient border for primary CTA buttons. The ring
    itself is a conic-gradient that spins via the --gradient-angle custom
    property (registered as an animatable <angle> below); the button's
@@ -194,14 +189,4 @@ body {
 
 .group:hover .resume-button-shine::after {
   transform: translateX(120%);
-}
-.content-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-.content-scroll::-webkit-scrollbar-thumb {
-  background: var(--color-hairline);
-  border-radius: 4px;
-}
-.content-scroll::-webkit-scrollbar-thumb:hover {
-  background: var(--color-ink-muted);
 }

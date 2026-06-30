@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { blogPosts, profile } from "@/data/content";
 import { ArrowLeftIcon } from "@/components/icons";
+import { BlogThumbnail } from "@/components/BlogThumbnail";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: `Blog — ${profile.name}`,
+  title: "Blog",
   description: `Writing from ${profile.name} on software and building things.`,
 };
 
@@ -34,30 +34,12 @@ export default function BlogPage() {
               rel="noreferrer"
               className="group block overflow-hidden rounded-xl border border-hairline bg-panel transition-colors hover:border-accent"
             >
-              <div
-                className="relative flex h-40 items-end p-5"
-                style={
-                  !post.thumbnail && post.thumbnailGradient
-                    ? {
-                        background: `linear-gradient(135deg, ${post.thumbnailGradient[0]}, ${post.thumbnailGradient[1]})`,
-                      }
-                    : undefined
-                }
-              >
-                {post.thumbnail ? (
-                  <Image
-                    src={post.thumbnail}
-                    alt={post.title}
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 640px) 400px, 100vw"
-                  />
-                ) : (
-                  <span className="font-display text-xl font-semibold leading-tight text-canvas drop-shadow-sm">
-                    {post.title}
-                  </span>
-                )}
-              </div>
+              <BlogThumbnail
+                post={post}
+                showTitleOverlay
+                sizes="(min-width: 640px) 400px, 100vw"
+                className="h-40 w-full items-end p-5"
+              />
               <div className="p-5">
                 <p className="font-mono text-xs text-ink-muted">
                   {[post.category ?? "Blog", post.date].filter(Boolean).join(" · ")}

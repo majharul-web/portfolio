@@ -397,8 +397,12 @@ export const blogPosts: BlogPost[] = [
     category: "LinkedIn",
     description:
       "In the fast-paced business world, effective communication is the cornerstone of success. A look at how to connect with new clients on LinkedIn — initiating conversations, crafting compelling messages, and mastering the follow-up.",
+    // LinkedIn's CDN signs these URLs with an expiry (the `e=` query
+    // param) — they will eventually stop loading. thumbnailGradient
+    // below is the fallback BlogThumbnail switches to on error.
     thumbnail:
       "https://media.licdn.com/dms/image/v2/D5622AQHoSHNuOWI7mg/feedshare-shrink_800/feedshare-shrink_800/0/1692538751566?e=1766016000&v=beta&t=UduAIo2RtVUHTQhYQc7pVDXlXQ19aldfmYAFGxtMUAA",
+    thumbnailGradient: ["#0a66c2", "#0a0e14"],
   },
   {
     title: "Binary Search: The Key to Fast and Efficient Searching",
@@ -408,6 +412,7 @@ export const blogPosts: BlogPost[] = [
       "Binary Search is a powerful algorithm used to quickly find the position of a target element in a sorted array — dividing the search space in half with each step instead of checking every element.",
     thumbnail:
       "https://media.licdn.com/dms/image/v2/D5612AQFdWUQ98j9Iag/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1736054007408?e=1766016000&v=beta&t=PFxM-R4i4jSx-UMutVK2zM1mQxjWJc08zpF72XuF_qA",
+    thumbnailGradient: ["#0a66c2", "#0a0e14"],
   },
   {
     title: "🚀 Mastering Unit Testing with the AAA Pattern",
@@ -415,5 +420,6 @@ export const blogPosts: BlogPost[] = [
     category: "LinkedIn",
     description: "Unit testing made easy! The AAA pattern — Arrange, Act, Assert — is your secret weapon.",
     thumbnail: "https://i.ibb.co.com/tqpJBjD/1699518417356.jpg",
+    thumbnailGradient: ["#c6ff3d", "#0a0e14"],
   },
 ];
