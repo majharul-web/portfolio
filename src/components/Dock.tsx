@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { dockNav, socials } from "@/data/content";
+import { dockNav, profile, socials } from "@/data/content";
 import {
   iconMap,
   SunIcon,
@@ -13,13 +13,14 @@ import {
   UserIcon,
   FolderIcon,
   PenIcon,
+  DownloadIcon,
 } from "@/components/icons";
 
 const navIconMap = {
   home: HomeIcon,
   about: UserIcon,
-  archive: FolderIcon,
-  blog: PenIcon,
+  projects: FolderIcon,
+  thoughts: PenIcon,
 } as const;
 
 type DockItemProps = {
@@ -39,16 +40,7 @@ type DockItemProps = {
  * for client-side transitions; external links use a plain anchor that
  * opens in a new tab.
  */
-function DockItem({
-  label,
-  isActive,
-  scale,
-  onHover,
-  onLeave,
-  href,
-  onClick,
-  children,
-}: DockItemProps) {
+function DockItem({ label, isActive, scale, onHover, onLeave, href, onClick, children }: DockItemProps) {
   const sharedProps = {
     "aria-label": label,
     onMouseEnter: onHover,
@@ -57,9 +49,7 @@ function DockItem({
     onBlur: onLeave,
     style: { transform: `scale(${scale}) translateY(${(scale - 1) * -10}px)` },
     className: `group relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-[transform,background-color,color] duration-150 ease-out ${
-      isActive
-        ? "bg-accent text-canvas"
-        : "text-ink-muted hover:text-ink-bright"
+      isActive ? "bg-accent text-canvas" : "text-ink-muted hover:text-ink-bright"
     }`,
   };
 
@@ -127,9 +117,7 @@ export function Dock() {
       label: item.label,
       href: item.href,
       isActive:
-        item.href === "/"
-          ? pathname === "/"
-          : pathname === item.href || pathname.startsWith(`${item.href}/`),
+        item.href === "/" ? pathname === "/" : pathname === item.href || pathname.startsWith(`${item.href}/`),
     })),
     {
       kind: "divider" as const,
@@ -144,6 +132,12 @@ export function Dock() {
       icon: social.icon,
       className: "hidden lg:block",
     })),
+    {
+      kind: "resume" as const,
+      key: "resume",
+      label: "Résumé",
+      href: profile.resumeHref,
+    },
     { kind: "divider" as const, key: "divider-2", className: "" },
     { kind: "theme" as const, key: "theme" },
   ];
@@ -154,20 +148,14 @@ export function Dock() {
 
   const getScale = (index: number) => {
     if (hoveredIndex === null) return 1;
-    const distance = Math.abs(
-      interactiveIndices.indexOf(index) -
-        interactiveIndices.indexOf(hoveredIndex),
-    );
+    const distance = Math.abs(interactiveIndices.indexOf(index) - interactiveIndices.indexOf(hoveredIndex));
     if (distance === 0) return 1.35;
     if (distance === 1) return 1.15;
     return 1;
   };
 
   return (
-    <nav
-      aria-label="Quick navigation"
-      className="sticky top-0 z-30 flex justify-center px-4 py-4"
-    >
+    <nav aria-label="Quick navigation" className="sticky top-0 z-30 flex justify-center px-4 py-4">
       <ul
         className="flex items-end gap-1 rounded-2xl border border-hairline bg-panel px-3 py-2 shadow-lg shadow-black/20 backdrop-blur-md"
         onMouseLeave={() => setHoveredIndex(null)}
@@ -175,11 +163,7 @@ export function Dock() {
         {items.map((item, index) => {
           if (item.kind === "divider") {
             return (
-              <li
-                key={item.key}
-                aria-hidden="true"
-                className={`px-1 ${item.className}`}
-              >
+              <li key={item.key} aria-hidden="true" className={`px-1 ${item.className}`}>
                 <span className="block h-6 w-px bg-hairline" />
               </li>
             );
@@ -222,14 +206,28 @@ export function Dock() {
             );
           }
 
+          if (item.kind === "resume") {
+            return (
+              <li key={item.key}>
+                <DockItem
+                  label={item.label}
+                  scale={scale}
+                  href={item.href}
+                  onHover={() => setHoveredIndex(index)}
+                  onLeave={() => {}}
+                >
+                  <DownloadIcon className="h-4.5 w-4.5" />
+                </DockItem>
+              </li>
+            );
+          }
+
           return (
             <li key={item.key}>
               <DockItem
                 label="Toggle theme"
                 scale={scale}
-                onClick={() =>
-                  setTheme(resolvedTheme === "dark" ? "light" : "dark")
-                }
+                onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
                 onHover={() => setHoveredIndex(index)}
                 onLeave={() => {}}
               >

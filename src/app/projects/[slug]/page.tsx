@@ -41,7 +41,7 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
   return (
     <main className="relative z-10 mx-auto max-w-4xl px-6 py-16 sm:px-12 lg:px-0 lg:py-24">
       <Link
-        href="/archive"
+        href="/projects"
         className="group inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.15em] text-accent transition-colors hover:text-accent-dim"
       >
         <ArrowLeftIcon className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
@@ -95,22 +95,25 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
         )}
       </div>
 
-      {project.thumbnail && (
-        <div className="mt-10">
-          <FeatureSlideshow
-            features={project.features}
-            image={project.thumbnail}
-            images={project.images}
-            projectName={project.name}
-          />
-        </div>
-      )}
-
       <div className="mt-12 space-y-10 text-[15px] leading-relaxed text-ink">
         <section>
           <h2 className="font-mono text-xs uppercase tracking-[0.15em] text-accent">Overview</h2>
           <p className="mt-3">{project.overview}</p>
         </section>
+
+        {project.thumbnail && (
+          <section>
+            <h2 className="font-mono text-xs uppercase tracking-[0.15em] text-accent">Feature walkthrough</h2>
+            <div className="mt-4">
+              <FeatureSlideshow
+                features={project.features}
+                image={project.thumbnail}
+                images={project.images}
+                projectName={project.name}
+              />
+            </div>
+          </section>
+        )}
 
         <section>
           <h2 className="font-mono text-xs uppercase tracking-[0.15em] text-accent">Outcome</h2>

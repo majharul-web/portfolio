@@ -10,7 +10,7 @@ export function Blog() {
   const preview = blogPosts.slice(0, PREVIEW_COUNT);
 
   return (
-    <Section id="blog" label="blog">
+    <Section id="thoughts" label="thoughts">
       <ul className="max-w-xl space-y-4">
         {preview.map((post) => (
           <li key={post.title}>
@@ -40,11 +40,8 @@ export function Blog() {
       </ul>
 
       <div className="mt-8">
-        <GradientButton
-          href="/blog"
-          icon={<ArrowRightIcon className="h-3.5 w-3.5" />}
-        >
-          View all posts
+        <GradientButton href="/thoughts" icon={<ArrowRightIcon className="h-3.5 w-3.5" />}>
+          View all thoughts
         </GradientButton>
       </div>
     </Section>

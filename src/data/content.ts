@@ -18,7 +18,7 @@ export const nav = [
   { id: "skills", label: "skills" },
   { id: "experience", label: "experience" },
   { id: "projects", label: "projects" },
-  { id: "blog", label: "blog" },
+  { id: "thoughts", label: "thoughts" },
 ] as const;
 
 // Cross-page navigation shown in the dock. Unlike `nav` above (in-page
@@ -26,8 +26,8 @@ export const nav = [
 export const dockNav = [
   { id: "home", label: "home", href: "/" },
   { id: "about", label: "about", href: "/about" },
-  { id: "archive", label: "archive", href: "/archive" },
-  { id: "blog", label: "blog", href: "/blog" },
+  { id: "projects", label: "projects", href: "/projects" },
+  { id: "thoughts", label: "thoughts", href: "/thoughts" },
 ] as const;
 
 export const socials = [
@@ -393,16 +393,16 @@ export const allProjects: ProjectEntry[] = [
 ];
 
 // Curated highlight reel shown on the homepage — pick your strongest few.
-// The full set above (`allProjects`) is what /archive and the project
+// The full set above (`allProjects`) is what /projects and the project
 // details pages draw from.
 export const projects: ProjectEntry[] = allProjects.filter((project) =>
   ["shohorbari", "travelkeep", "photo-book"].includes(project.slug),
 );
 
-export const projectsArchiveHref = "/archive";
+export const projectsArchiveHref = "/projects";
 
 // ---------------------------------------------------------------------------
-// Full project archive — shown at /archive using the same card-row style
+// Full project list — shown at /projects using the same card-row style
 // as the homepage's curated `projects` list above. This one is meant to
 // grow over time as you ship more; add entries at the top, newest first.
 // ---------------------------------------------------------------------------

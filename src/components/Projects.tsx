@@ -16,11 +16,8 @@ export function Projects() {
       </ul>
 
       <div className="mt-8">
-        <GradientButton
-          href={projectsArchiveHref}
-          icon={<ArrowRightIcon className="h-3.5 w-3.5" />}
-        >
-          View full project archive
+        <GradientButton href={projectsArchiveHref} icon={<ArrowRightIcon className="h-3.5 w-3.5" />}>
+          View all projects
         </GradientButton>
       </div>
     </Section>
