@@ -6,6 +6,7 @@ import { About } from "@/components/About";
 import { WhatIDo } from "@/components/WhatIDo";
 import { Skills } from "@/components/Skills";
 import { Experience } from "@/components/Experience";
+import { Education } from "@/components/Education";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -33,6 +34,7 @@ export default function AboutPage() {
 
         <Skills full />
         <Experience full defaultOpenFirst />
+        <Education />
         <WhatIDo />
       </div>
 

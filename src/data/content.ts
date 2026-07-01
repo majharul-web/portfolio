@@ -158,6 +158,22 @@ export const skillCategories: SkillCategory[] = [
   },
 ];
 
+export type EducationEntry = {
+  range: string;
+  degree: string;
+  institution: string;
+  cgpa?: string;
+};
+
+export const education: EducationEntry[] = [
+  {
+    range: "2016 – 2021",
+    degree: "Diploma in Computer Engineering",
+    institution: "Dinajpur Polytechnic Institute",
+    cgpa: "3.92",
+  },
+];
+
 export type ExperienceEntry = {
   range: string;
   title: string;
