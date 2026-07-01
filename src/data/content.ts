@@ -5,7 +5,7 @@
 
 export const profile = {
   name: "Majharul Islam",
-  role: "Software Engineer",
+  role: "Software Developer",
   tagline: "I build fast, accessible web apps with clean, maintainable code.",
   email: "majharul.live@gmail.com",
   phone: "+880 1747-615357",

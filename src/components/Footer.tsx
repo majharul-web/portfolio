@@ -1,9 +1,13 @@
 import { profile, socials } from "@/data/content";
 import { iconMap, MailIcon, PhoneIcon } from "@/components/icons";
 
-export function Footer() {
+type FooterProps = {
+  from?: "others" | "home";
+};
+
+export function Footer({ from = "others" }: FooterProps) {
   return (
-    <footer>
+    <footer className={`${from === "home" ? "mt-0" : "mt-14"}`}>
       <div className="relative">
         <span className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2 inline-flex rounded-full border border-hairline bg-canvas px-4 py-1.5 font-mono text-xs uppercase tracking-[0.15em] text-ink-muted">
           Contact

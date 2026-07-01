@@ -15,7 +15,7 @@ export default function Home() {
         <Experience />
         <Projects />
         <Blog />
-        <Footer />
+        <Footer from="home" />
       </main>
     </div>
   );

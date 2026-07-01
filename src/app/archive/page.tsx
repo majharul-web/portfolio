@@ -25,7 +25,7 @@ export default function ArchivePage() {
         All Projects
       </h1>
 
-      <ul className="mt-12 max-w-xl space-y-6">
+      <ul className="mt-12 max-w-4xl space-y-6">
         {archiveProjects.map((project) => (
           <li key={project.name}>
             <ProjectCard project={project} />

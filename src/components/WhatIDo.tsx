@@ -10,7 +10,7 @@ const whatIDoIconMap = {
 
 export function WhatIDo() {
   return (
-    <div className="mb-14">
+    <div>
       <p className="font-mono text-xs tracking-[0.15em] text-accent">
         <span className="text-ink-muted">~/</span>
         what-i-do
