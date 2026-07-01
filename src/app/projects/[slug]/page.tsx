@@ -1,26 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
+
 import { notFound } from "next/navigation";
 import { allProjects } from "@/data/content";
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  ExternalLinkIcon,
-  GithubIcon,
-} from "@/components/icons";
+import { ArrowLeftIcon, ArrowRightIcon, ExternalLinkIcon, GithubIcon } from "@/components/icons";
 import { GradientButton } from "@/components/GradientButton";
+import { FeatureSlideshow } from "@/components/FeatureSlideshow";
 import { Footer } from "@/components/Footer";
 
 export async function generateStaticParams() {
   return allProjects.map((project) => ({ slug: project.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const project = allProjects.find((p) => p.slug === slug);
 
@@ -34,11 +26,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProjectDetailsPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const projectIndex = allProjects.findIndex((p) => p.slug === slug);
   const project = allProjects[projectIndex];
@@ -47,12 +35,8 @@ export default async function ProjectDetailsPage({
     notFound();
   }
 
-  const previousProject =
-    projectIndex > 0 ? allProjects[projectIndex - 1] : undefined;
-  const nextProject =
-    projectIndex < allProjects.length - 1
-      ? allProjects[projectIndex + 1]
-      : undefined;
+  const previousProject = projectIndex > 0 ? allProjects[projectIndex - 1] : undefined;
+  const nextProject = projectIndex < allProjects.length - 1 ? allProjects[projectIndex + 1] : undefined;
 
   return (
     <main className="relative z-10 mx-auto max-w-4xl px-6 py-16 sm:px-12 lg:px-0 lg:py-24">
@@ -112,50 +96,29 @@ export default async function ProjectDetailsPage({
       </div>
 
       {project.thumbnail && (
-        <div className="relative mt-10 aspect-video w-full overflow-hidden rounded-xl ring-1 ring-hairline">
-          <Image
-            src={project.thumbnail}
-            alt={project.name}
-            fill
-            className="object-cover object-top"
-            sizes="(min-width: 1024px) 800px, 100vw"
+        <div className="mt-10">
+          <FeatureSlideshow
+            features={project.features}
+            image={project.thumbnail}
+            images={project.images}
+            projectName={project.name}
           />
         </div>
       )}
 
       <div className="mt-12 space-y-10 text-[15px] leading-relaxed text-ink">
         <section>
-          <h2 className="font-mono text-xs uppercase tracking-[0.15em] text-accent">
-            Overview
-          </h2>
+          <h2 className="font-mono text-xs uppercase tracking-[0.15em] text-accent">Overview</h2>
           <p className="mt-3">{project.overview}</p>
         </section>
 
         <section>
-          <h2 className="font-mono text-xs uppercase tracking-[0.15em] text-accent">
-            Features
-          </h2>
-          <ul className="mt-3 space-y-2.5">
-            {project.features.map((feature, i) => (
-              <li key={i} className="flex gap-3">
-                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                <span>{feature}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section>
-          <h2 className="font-mono text-xs uppercase tracking-[0.15em] text-accent">
-            Outcome
-          </h2>
+          <h2 className="font-mono text-xs uppercase tracking-[0.15em] text-accent">Outcome</h2>
           <p className="mt-3">{project.outcome}</p>
         </section>
 
         <section>
-          <h2 className="font-mono text-xs uppercase tracking-[0.15em] text-accent">
-            Challenges
-          </h2>
+          <h2 className="font-mono text-xs uppercase tracking-[0.15em] text-accent">Challenges</h2>
           <p className="mt-3">{project.challenges}</p>
         </section>
       </div>
@@ -174,9 +137,7 @@ export default async function ProjectDetailsPage({
                 <ArrowLeftIcon className="h-3 w-3 transition-transform group-hover:-translate-x-1" />
                 Previous
               </span>
-              <span className="truncate text-sm font-medium text-ink-bright">
-                {previousProject.name}
-              </span>
+              <span className="truncate text-sm font-medium text-ink-bright">{previousProject.name}</span>
             </Link>
           ) : (
             <span />
@@ -191,9 +152,7 @@ export default async function ProjectDetailsPage({
                 Next
                 <ArrowRightIcon className="h-3 w-3 transition-transform group-hover:translate-x-1" />
               </span>
-              <span className="truncate text-sm font-medium text-ink-bright">
-                {nextProject.name}
-              </span>
+              <span className="truncate text-sm font-medium text-ink-bright">{nextProject.name}</span>
             </Link>
           )}
         </nav>

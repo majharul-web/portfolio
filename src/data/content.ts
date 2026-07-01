@@ -240,6 +240,8 @@ export type ProjectEntry = {
   // Fields used on the standalone project details page.
   overview: string;
   features: string[];
+  /** One image per feature slide for the FeatureSlideshow. Falls back to [thumbnail] if absent. */
+  images?: string[];
   outcome: string;
   challenges: string;
   clientCode?: string;
@@ -256,6 +258,12 @@ export const allProjects: ProjectEntry[] = [
       "A full-stack rental marketplace for listing, browsing, and managing rental properties, with request handling for customers and admins.",
     stack: ["React.js", "Tailwind CSS", "Django REST Framework", "PostgreSQL"],
     thumbnail: "https://i.ibb.co.com/9mW2RJXd/image.png",
+    images: [
+      "https://picsum.photos/seed/shohorbari-0/800/500",
+      "https://picsum.photos/seed/shohorbari-1/800/500",
+      "https://picsum.photos/seed/shohorbari-2/800/500",
+      "https://picsum.photos/seed/shohorbari-3/800/500",
+    ],
     overview:
       "Shohorbari is a full-stack rental management platform that allows users to list, browse, and manage rental properties. It streamlines rental advertisement management and request handling for both customers and administrators.",
     features: [
@@ -280,6 +288,14 @@ export const allProjects: ProjectEntry[] = [
       "A Travel Management SaaS product that streamlines agency workflows — bookings, cancellations, and customer data — for travel agents.",
     stack: ["Golang", "Next.js", "TypeScript", "Redux", "RTK Query", "Tailwind CSS"],
     thumbnail: "https://i.ibb.co.com/xtzjJV81/image.png",
+    images: [
+      "https://picsum.photos/seed/travelkeep-0/800/500",
+      "https://picsum.photos/seed/travelkeep-1/800/500",
+      "https://picsum.photos/seed/travelkeep-2/800/500",
+      "https://picsum.photos/seed/travelkeep-3/800/500",
+      "https://picsum.photos/seed/travelkeep-4/800/500",
+      "https://picsum.photos/seed/travelkeep-5/800/500",
+    ],
     overview:
       "Travelkeep is a Travel Management SaaS product designed to streamline agency workflows and optimize travel booking management. It provides agents with a centralized platform to manage bookings, cancellations, and customer data efficiently.",
     features: [
@@ -304,6 +320,11 @@ export const allProjects: ProjectEntry[] = [
       "A fully featured e-commerce platform with intuitive cart management and a quick, conversion-friendly checkout flow.",
     stack: ["React", "PHP (Laravel)", "MySQL", "Bootstrap"],
     thumbnail: "https://i.ibb.co.com/LD5JnVnN/image.png",
+    images: [
+      "https://picsum.photos/seed/automart-0/800/500",
+      "https://picsum.photos/seed/automart-1/800/500",
+      "https://picsum.photos/seed/automart-2/800/500",
+    ],
     overview:
       "Automart is a fully featured e-commerce platform providing an engaging and smooth shopping experience for customers, with an emphasis on intuitive cart management and quick checkout.",
     features: [
@@ -325,6 +346,12 @@ export const allProjects: ProjectEntry[] = [
       "An interactive photo-sharing platform where users browse, like, and comment on user-uploaded images.",
     stack: ["React", "Redux", "Tailwind CSS", "Firebase", "Express.js", "MongoDB"],
     thumbnail: "https://i.ibb.co.com/qgyxZN6/Photo-book-12-31-2024-11-23-PM.png",
+    images: [
+      "https://picsum.photos/seed/photobook-0/800/500",
+      "https://picsum.photos/seed/photobook-1/800/500",
+      "https://picsum.photos/seed/photobook-2/800/500",
+      "https://picsum.photos/seed/photobook-3/800/500",
+    ],
     overview:
       "Photo Book is a personal project offering an interactive platform for users to share and engage with photos. It enables browsing, liking, and commenting on user-uploaded images.",
     features: [
@@ -348,6 +375,10 @@ export const allProjects: ProjectEntry[] = [
       "A company branding website showcasing corporate identity and services, built mobile-first for engagement across devices.",
     stack: ["PHP (Laravel)", "MySQL", "Bootstrap", "jQuery"],
     thumbnail: "https://i.ibb.co.com/tY15V5H/Cloudone.png",
+    images: [
+      "https://picsum.photos/seed/cloudone-0/800/500",
+      "https://picsum.photos/seed/cloudone-1/800/500",
+    ],
     overview:
       "Cloudone is a company branding website designed to showcase corporate identity and services with a focus on user engagement and brand presence.",
     features: [
